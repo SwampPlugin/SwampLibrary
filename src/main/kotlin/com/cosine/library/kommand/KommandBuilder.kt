@@ -5,7 +5,6 @@ import com.cosine.library.extension.async
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.command.PluginCommand
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
@@ -124,6 +123,8 @@ abstract class KommandBuilder(
     }
 
     open fun runDefaultCommand(sender: CommandSender) = printHelp(sender)
+
+    open fun runDefaultCommand(player: Player) = printHelp(player)
 
     private fun onCommand(sender: CommandSender, args: Array<String>) {
         val kommandData = pluginCommand.run {

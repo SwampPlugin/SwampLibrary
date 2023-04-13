@@ -25,16 +25,20 @@ abstract class InventoryBuilder(
     }
 
     abstract fun init(inventory: Inventory)
-    open fun postInitialized(inventory: Inventory, viewer: Player) {}
+
+    open fun initWithPlayer(inventory: Inventory, player: Player) {}
+
+    open fun postInitialized(inventory: Inventory, player: Player) {}
 
     fun openInventory(player: Player) {
         init(inventory)
+        initWithPlayer(inventory, player)
         player.openInventory(inventory)
         postInitialized(inventory, player)
     }
 
     internal fun onInventoryClick(event: InventoryClickEvent) {
-        if(isCancelled) event.isCancelled = true
+        if (isCancelled) event.isCancelled = true
         onClick(event)
     }
 
@@ -43,6 +47,6 @@ abstract class InventoryBuilder(
     }
 
     protected open fun onClick(event: InventoryClickEvent) {}
-    protected open fun onClose(event: InventoryCloseEvent) {}
 
+    protected open fun onClose(event: InventoryCloseEvent) {}
 }
