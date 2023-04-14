@@ -36,3 +36,21 @@ fun String.isNotInt(): Boolean {
         true
     }
 }
+
+fun String.isDouble(): Boolean {
+    return try {
+        this.toDouble()
+        true
+    } catch (e: NumberFormatException) {
+        false
+    }
+}
+
+fun String.isNotDouble(): Boolean {
+    return try {
+        this.toDouble()
+        false
+    } catch (e: NumberFormatException) {
+        true
+    }
+}

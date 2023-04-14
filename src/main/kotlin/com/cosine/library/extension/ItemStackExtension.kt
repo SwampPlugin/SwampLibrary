@@ -31,10 +31,11 @@ inline fun <reified T : Any> ItemStack.hasNBTTag(clazz: KClass<T>): Boolean {
     return CraftItemStack.asNMSCopy(this).u()?.e(T::class.java.simpleName) ?: false
 }
 
-inline fun <reified T : Any> ItemStack.removeNBTTag(clazz: KClass<T>) {
+inline fun <reified T : Any> ItemStack.removeNBTTag(clazz: KClass<T>): ItemStack {
     itemMeta = CraftItemStack.asBukkitCopy(
         CraftItemStack.asNMSCopy(this).apply {
             u()?.r(T::class.java.simpleName)
         }
     ).itemMeta
+    return this
 }
