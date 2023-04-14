@@ -137,7 +137,11 @@ abstract class KommandBuilder(
             }
         }
         if (!kommandData.isSubCommand) {
-            runDefaultCommand(sender)
+            if (sender is Player) {
+                runDefaultCommand(sender)
+            } else {
+                runDefaultCommand(sender)
+            }
             return
         }
         val argument = arguments[args[0]] ?: run {
