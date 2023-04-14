@@ -27,6 +27,7 @@ publishing {
             groupId = "com.cosine.library"
             artifactId = "SwampLibrary"
             version = "1.0"
+
             from(components["java"])
         }
     }
