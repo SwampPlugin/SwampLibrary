@@ -5,6 +5,7 @@ import com.cosine.library.extension.async
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.command.PluginCommand
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
@@ -17,7 +18,7 @@ import kotlin.reflect.jvm.javaMethod
 import kotlin.reflect.jvm.jvmErasure
 
 abstract class KommandBuilder(
-    plugin: JavaPlugin,
+    private val plugin: JavaPlugin,
     prefix: String? = null
 ): CommandExecutor, TabCompleter {
 
@@ -180,17 +181,19 @@ abstract class KommandBuilder(
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         runCatching {
-            if (sender is Player) {
-                onCommand(sender, args)
-            } else {
-                onCommand(sender, args)
-            }
-        }.onFailure {
-            if (it is IllegalArgumentException && it.message == IS_CONSOLE_ERORR_MESSAGE) {
+            onCommand(sender, args)
+        }.onFailure { throwable ->
+            if (throwable is IllegalArgumentException && throwable.message == IS_CONSOLE_ERORR_MESSAGE) {
                 sender.sendMessage("$prefix 콘솔에서 실행할 수 없는 명령어입니다.")
                 return true
             }
-            sender.sendMessage("$prefix $it")
+            sender.sendMessage(
+                "$prefix 명령어 실행에 실패하였습니다.",
+                "§7└ $throwable"
+            )
+            throwable.stackTrace.forEach {
+                plugin.logger.warning("$it")
+            }
         }
         return true
     }
