@@ -16,9 +16,6 @@ dependencies {
     compileOnly("io.papermc.paper", "paper-api", "1.19.3-R0.1-SNAPSHOT")
     compileOnly("org.spigotmc", "spigot", "1.19.3-R0.1-SNAPSHOT")
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.6.4")
-
-    testImplementation(kotlin("test"))
 }
 
 publishing {
@@ -31,10 +28,6 @@ publishing {
             from(components["java"])
         }
     }
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 tasks {
