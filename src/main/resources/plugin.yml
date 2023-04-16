@@ -4,5 +4,11 @@ api-version: 1.19
 main: com.cosine.library.SwampLibrary
 authors: [ Cosine_A ]
 description: 늪지대 놀이터 라이브러리
+#libraries:
+  #- org.jetbrains.kotlin:kotlin-stdlib:1.8.0
+  #- org.jetbrains.kotlin:kotlin-reflect:1.8.0
+loadbefore:
+  - ST-Core
+  - MS-Core
 softdepend:
   - ProtocolLib

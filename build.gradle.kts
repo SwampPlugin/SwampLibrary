@@ -1,6 +1,6 @@
 plugins {
     id("maven-publish")
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
     id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
@@ -32,11 +32,8 @@ publishing {
 
 tasks {
     shadowJar {
+        //relocate("kotlin.reflect", "com.cosine.kotlin.reflect")
         archiveFileName.set("${rootProject.name}-${project.version}.jar")
         destinationDirectory.set(File("D:\\서버\\1.19.3 - 악어 놀이터2\\plugins"))
     }
-}
-
-kotlin {
-    jvmToolchain(17)
 }
