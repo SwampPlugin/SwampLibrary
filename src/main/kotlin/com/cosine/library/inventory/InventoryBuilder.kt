@@ -24,13 +24,19 @@ abstract class InventoryBuilder(
             .apply { inv = this }
     }
 
-    abstract fun init(inventory: Inventory)
+    open fun prevInit(inventory: Inventory) {}
+
+    open fun prevInitWithPlayer(inventory: Inventory, player: Player) {}
+
+    open fun init(inventory: Inventory) {}
 
     open fun initWithPlayer(inventory: Inventory, player: Player) {}
 
     open fun postInitialized(inventory: Inventory, player: Player) {}
 
     fun openInventory(player: Player) {
+        prevInit(inventory)
+        prevInitWithPlayer(inventory, player)
         init(inventory)
         initWithPlayer(inventory, player)
         player.openInventory(inventory)

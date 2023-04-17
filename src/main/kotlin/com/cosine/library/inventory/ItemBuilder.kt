@@ -41,6 +41,11 @@ class ItemBuilder(
         return this
     }
 
+    fun hideAllItemFlags(): ItemBuilder {
+        itemMeta.addItemFlags(*ItemFlag.values())
+        return this
+    }
+
     fun setUnbreakable(): ItemBuilder {
         itemMeta.isUnbreakable = true
         return this

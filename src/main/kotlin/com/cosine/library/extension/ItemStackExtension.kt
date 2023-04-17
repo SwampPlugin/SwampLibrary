@@ -1,14 +1,28 @@
 package com.cosine.library.extension
 
+import com.cosine.library.inventory.ItemBuilder
 import com.google.gson.Gson
 import net.minecraft.nbt.NBTTagCompound
 import org.bukkit.craftbukkit.v1_19_R2.inventory.CraftItemStack
+import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import kotlin.reflect.KClass
 
 fun ItemStack.amount(amount: Int = 1): ItemStack {
     this.amount = amount
     return this
+}
+
+fun ItemStack.setDisplayName(displayName: String): ItemStack {
+    return apply { itemMeta = itemMeta?.apply { setDisplayName(displayName) } }
+}
+
+fun ItemStack.setLore(vararg lores: String?): ItemStack {
+    return apply { itemMeta = itemMeta?.apply { lore = lores.filterNotNull() } }
+}
+
+fun ItemStack.hideAllItemFlags(): ItemStack {
+    return apply { itemMeta = itemMeta?.apply { addItemFlags(*ItemFlag.values()) } }
 }
 
 inline fun <reified T> ItemStack.addNBTTag(obj: T): ItemStack {
