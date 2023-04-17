@@ -1,6 +1,5 @@
 package com.cosine.library.extension
 
-import com.cosine.library.inventory.ItemBuilder
 import com.google.gson.Gson
 import net.minecraft.nbt.NBTTagCompound
 import org.bukkit.craftbukkit.v1_19_R2.inventory.CraftItemStack
@@ -17,8 +16,19 @@ fun ItemStack.setDisplayName(displayName: String): ItemStack {
     return apply { itemMeta = itemMeta?.apply { setDisplayName(displayName) } }
 }
 
-fun ItemStack.setLore(vararg lores: String?): ItemStack {
+fun ItemStack.setNewLore(vararg lores: String?): ItemStack {
     return apply { itemMeta = itemMeta?.apply { lore = lores.filterNotNull() } }
+}
+
+fun ItemStack.setLore(vararg lores: String?): ItemStack {
+    return apply {
+        itemMeta = itemMeta?.apply {
+            val newLore = mutableListOf<String>()
+            lore?.let { newLore.addAll(it) }
+            newLore.addAll(lores.filterNotNull())
+            lore = newLore
+        }
+    }
 }
 
 fun ItemStack.hideAllItemFlags(): ItemStack {
