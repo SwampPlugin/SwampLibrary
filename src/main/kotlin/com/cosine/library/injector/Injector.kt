@@ -3,7 +3,7 @@ package com.cosine.library.injector
 import java.util.function.Supplier
 import kotlin.reflect.KClass
 
-abstract class Injector {
+open class Injector {
 
     private val mappings = mutableSetOf<QualifierData<*>>()
 

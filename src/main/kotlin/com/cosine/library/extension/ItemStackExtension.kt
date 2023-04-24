@@ -2,10 +2,13 @@ package com.cosine.library.extension
 
 import com.google.gson.Gson
 import net.minecraft.nbt.NBTTagCompound
+import org.bukkit.Material
 import org.bukkit.craftbukkit.v1_19_R2.inventory.CraftItemStack
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import kotlin.reflect.KClass
+
+val ItemStack?.isAir get() = this?.type?.equals(Material.AIR) == true
 
 fun ItemStack.amount(amount: Int = 1): ItemStack {
     this.amount = amount
