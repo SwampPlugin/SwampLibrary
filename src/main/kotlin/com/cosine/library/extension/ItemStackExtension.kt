@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import net.minecraft.nbt.NBTTagCompound
 import org.bukkit.Material
 import org.bukkit.craftbukkit.v1_19_R2.inventory.CraftItemStack
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import kotlin.reflect.KClass
@@ -37,6 +38,19 @@ fun ItemStack.setLore(vararg lores: String?): ItemStack {
 fun ItemStack.hideAllItemFlags(): ItemStack {
     return apply { itemMeta = itemMeta?.apply { addItemFlags(*ItemFlag.values()) } }
 }
+
+fun ItemStack.setGlow(): ItemStack {
+    return apply {
+        addUnsafeEnchantment(Enchantment.LURE, 1)
+        itemMeta = itemMeta?.apply {
+            addItemFlags(ItemFlag.HIDE_ENCHANTS)
+        }
+    }
+}
+
+fun ItemStack.hasCustomModelData() = itemMeta.hasCustomModelData()
+
+val ItemStack.customModelData get() = if (itemMeta.hasCustomModelData()) itemMeta.customModelData else 0
 
 inline fun <reified T> ItemStack.addNBTTag(obj: T): ItemStack {
     itemMeta = CraftItemStack.asBukkitCopy(
