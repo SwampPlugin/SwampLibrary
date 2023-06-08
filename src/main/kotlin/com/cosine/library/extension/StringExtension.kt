@@ -13,7 +13,7 @@ val String.uuid get() = UUID.fromString(this)
 
 fun String.applyColor(): String = ChatColor.translateAlternateColorCodes('&', this)
 
-fun MutableList<String>.applyColors(): MutableList<String> {
+fun List<String>.applyColor(): MutableList<String> {
     return this.map(String::applyColor).toMutableList()
 }
 

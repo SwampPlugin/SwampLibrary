@@ -1,6 +1,7 @@
 package com.cosine.library
 
 import com.cosine.library.inventory.InventoryListener
+import com.cosine.library.permission.PermissionListener
 import com.cosine.library.util.ItemStackLocale
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -18,5 +19,6 @@ class SwampLibrary : JavaPlugin() {
     override fun onEnable() {
         ItemStackLocale.init(this)
         server.pluginManager.registerEvents(InventoryListener(), this)
+        server.pluginManager.registerEvents(PermissionListener(), this)
     }
 }

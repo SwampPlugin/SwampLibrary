@@ -48,6 +48,14 @@ fun ItemStack.setGlow(): ItemStack {
     }
 }
 
+fun ItemStack.setCustomModelData(customModelData: Int): ItemStack {
+    return apply {
+        itemMeta = itemMeta?.apply {
+            setCustomModelData(customModelData)
+        }
+    }
+}
+
 fun ItemStack.hasCustomModelData() = itemMeta.hasCustomModelData()
 
 val ItemStack.customModelData get() = if (itemMeta.hasCustomModelData()) itemMeta.customModelData else 0
