@@ -56,9 +56,9 @@ fun ItemStack.setCustomModelData(customModelData: Int): ItemStack {
     }
 }
 
-fun ItemStack.hasCustomModelData() = itemMeta.hasCustomModelData()
+fun ItemStack.hasCustomModelData() = hasItemMeta() && itemMeta.hasCustomModelData()
 
-val ItemStack.customModelData get() = if (itemMeta.hasCustomModelData()) itemMeta.customModelData else 0
+val ItemStack.customModelData get() = if (hasItemMeta() && itemMeta.hasCustomModelData()) itemMeta.customModelData else 0
 
 inline fun <reified T> ItemStack.addNBTTag(obj: T): ItemStack {
     itemMeta = CraftItemStack.asBukkitCopy(

@@ -1,10 +1,7 @@
 package com.cosine.library.sign
 
 import com.cosine.library.SwampLibrary.Companion.plugin
-import com.cosine.library.extension.component
 import com.cosine.library.extension.later
-import com.cosine.library.extension.text
-import net.kyori.adventure.text.Component
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Sign
@@ -30,7 +27,7 @@ class ExtraSign(
                     val player = event.player
                     val extraSign = receivers.remove(player.uniqueId) ?: return
 
-                    if (extraSign.response(event.lines().map(Component::text).toTypedArray())) {
+                    if (extraSign.response(event.lines)) {
                         extraSign.signLocation.block.type = extraSign.originalBlock
                     } else {
                         later { extraSign.open() }
@@ -54,7 +51,7 @@ class ExtraSign(
         val sign = state as Sign
 
         texts.forEachIndexed { index, text ->
-            state.line(index, text.component)
+            state.setLine(index, text)
         }
         sign.update(true)
 
